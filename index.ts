@@ -58,17 +58,23 @@ async function connectToMongoDB() {
 }
 
 const handler = async (req: Request) => {
-  // Example route handling
+
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "http://localhost:5173",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
   const url = new URL(req.url);
 
   if (url.pathname === "/") {
-    return new Response("Hello, Bun!", {
+    return new Response("FREEE MONEYYYY", {
       headers: { "Content-Type": "text/plain" },
     });
   }
 
   if(url.pathname === "/check-eligibility") {
-    return await checkEligibility(req); 
+    return await checkEligibility(req, corsHeaders); 
   }
 
   // Default 404 response
